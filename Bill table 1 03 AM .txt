@@ -1,0 +1,6 @@
+Ordered products:
+Product: inghetata price:7
+--------------------------------------
+Total: 7
+Date: Thu May 07 03:22:36 EEST 2020
+Table: 1
