@@ -18,6 +18,19 @@ public class Order  {
         return Objects.hash(this.date, this.table, this.orderID);
     }
 
+    public boolean equals(Object obj)
+    {
+        if(obj == null || this.getClass() != obj.getClass())
+            return false;
+        if(this == obj)
+            return true;
+        Order order = (Order)obj;
+        if(order.getDate().equals(this.date) && this.getOrderID() == order.orderID && this.getTable() == order.table)
+            return true;
+        else
+            return false;
+    }
+
     public void setOrderID(int orderID) {
         this.orderID = orderID;
     }

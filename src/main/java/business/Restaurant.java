@@ -71,8 +71,14 @@ public class Restaurant extends Observable implements IRestaurantProcessing{
         assert name!=null&&items.size()!=0:"invalid input";
         assert isWellFormed():"is not well formed";
 
-        CompositeProduct compositeProduct= new CompositeProduct(name);
+        ArrayList<MenuItem> itemsAux=new ArrayList<MenuItem>();
         for(MenuItem menuItem: items){
+            MenuItem men=menuItem;
+            itemsAux.add(men);
+        }
+
+        CompositeProduct compositeProduct= new CompositeProduct(name);
+        for(MenuItem menuItem: itemsAux){
             compositeProduct.addItem(menuItem);
         }
         menu.add(compositeProduct);
@@ -102,13 +108,19 @@ public class Restaurant extends Observable implements IRestaurantProcessing{
         assert oldName!=null&&newName!=null&&items.size()!=0:"invalid input";
         assert isWellFormed():"is not well formed";
 
+        ArrayList<MenuItem> itemsAux=new ArrayList<MenuItem>();
+        for(MenuItem menuItem: items){
+            MenuItem men=menuItem;
+            itemsAux.add(men);
+        }
+
         for(MenuItem menuItem: menu)
             if(menuItem.getName().equals(oldName)) {
                 CompositeProduct comp=(CompositeProduct)menuItem;
                 comp.setName(newName);
                 comp.getCompositions().removeAll(comp.getCompositions());
                 comp.setPrice(0);
-                for(MenuItem men: items){
+                for(MenuItem men: itemsAux){
                     comp.addItem(men);
                 }
             }
@@ -164,6 +176,7 @@ public class Restaurant extends Observable implements IRestaurantProcessing{
         Date date = new Date(System.currentTimeMillis());
         Order order = new Order(orders.size(),date,table);
         orders.add(order);
+
         ArrayList<MenuItem> itemsAux=new ArrayList<MenuItem>();
         for(MenuItem menuItem: items){
             MenuItem men=menuItem;
